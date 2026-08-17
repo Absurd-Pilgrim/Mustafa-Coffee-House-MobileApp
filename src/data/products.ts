@@ -1,0 +1,55 @@
+import { assets } from "./assets"
+import type { Product } from "../types"
+
+export const products: Product[] = [
+  {
+    id: "latte",
+    name: "Heritage Pistachio Latte",
+    description: "Rich espresso layered with pistachio cream, silky milk, and a refined touch of sweetness.",
+    price: 6.25,
+    beans: 63,
+    image: assets.latte,
+    category: "Signature Lattes",
+    badge: "POPULAR",
+  },
+  {
+    id: "coffee",
+    name: "Mustafa House Coffee",
+    description: "A smooth, comforting house coffee served fresh with signature warmth.",
+    price: 3.95,
+    beans: 40,
+    image: assets.cup,
+    category: "Hot Coffee",
+    badge: "HOUSE FAVORITE",
+  },
+  {
+    id: "frappe",
+    name: "Date Cream Frappe",
+    description: "A luscious blended frappe crowned with cream, biscuit, and a whole Medjool date.",
+    price: 5.75,
+    beans: 58,
+    image: assets.frappe,
+    category: "Iced Coffee",
+    badge: "SIGNATURE",
+  },
+  {
+    id: "croissant",
+    name: "Pistachio Croissant",
+    description: "Flaky croissant layered with pistachio cream and finished with a rich drizzle.",
+    price: 5.25,
+    beans: 53,
+    image: assets.croissant,
+    category: "Bakery",
+    badge: "POPULAR",
+  },
+  {
+    id: "cake",
+    name: "Signature Chocolate Cake",
+    description: "Rich chocolate cake finished with dark glaze and a velvety cocoa crumb.",
+    price: 8.95,
+    beans: 90,
+    image: assets.cake,
+    category: "Desserts",
+    badge: "CHEF'S PICK",
+  },
+]

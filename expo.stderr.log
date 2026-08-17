@@ -1,0 +1,26 @@
+"textShadow*" style props are deprecated. Use "textShadow".
+Error: Premature close
+    at onclose (node:internal/streams/end-of-stream:162:30)
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)
+C:\Users\Dipanjan\Desktop\Mustafa_Coffee_House\mobile-native\node_modules\expo\node_modules\@expo\cli\build\src\utils\errors.js:130
+    throw error;
+    ^
+
+Error: ENOENT: no such file or directory, watch 'C:\Users\Dipanjan\Desktop\Mustafa_Coffee_House\mobile-native\node_modules\@tybys\wasm-util\lib\mjs\wasi'
+    at FSWatcher.<computed> (node:internal/fs/watchers:254:19)
+    at Object.watch (node:fs:2549:36)
+    at FallbackWatcher._watchdir (C:\Users\Dipanjan\Desktop\Mustafa_Coffee_House\mobile-native\node_modules\metro-file-map\src\watchers\FallbackWatcher.js:119:33)
+    at C:\Users\Dipanjan\Desktop\Mustafa_Coffee_House\mobile-native\node_modules\metro-file-map\src\watchers\FallbackWatcher.js:219:22
+    at Walker.<anonymous> (C:\Users\Dipanjan\Desktop\Mustafa_Coffee_House\mobile-native\node_modules\metro-file-map\src\watchers\FallbackWatcher.js:358:5)
+    at Walker.emit (node:events:519:28)
+    at C:\Users\Dipanjan\Desktop\Mustafa_Coffee_House\mobile-native\node_modules\walker\lib\walker.js:69:16
+    at FSReqCallback.oncomplete (node:fs:187:23)
+    at FSReqCallback.callbackTrampoline (node:internal/async_hooks:130:17) {
+  errno: -4058,
+  syscall: 'watch',
+  code: 'ENOENT',
+  path: 'C:\\Users\\Dipanjan\\Desktop\\Mustafa_Coffee_House\\mobile-native\\node_modules\\@tybys\\wasm-util\\lib\\mjs\\wasi',
+  filename: 'C:\\Users\\Dipanjan\\Desktop\\Mustafa_Coffee_House\\mobile-native\\node_modules\\@tybys\\wasm-util\\lib\\mjs\\wasi'
+}
+
+Node.js v22.19.0
