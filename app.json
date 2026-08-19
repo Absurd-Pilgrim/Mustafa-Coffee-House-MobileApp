@@ -40,6 +40,12 @@
           }
         }
       ],
+      [
+        "expo-navigation-bar",
+        {
+          "barStyle": "light"
+        }
+      ],
       "@react-native-community/datetimepicker"
     ],
     "experiments": {

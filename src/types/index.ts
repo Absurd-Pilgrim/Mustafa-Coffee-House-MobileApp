@@ -6,6 +6,7 @@ export type Screen =
   | "signin"
   | "signup"
   | "home"
+  | "locations"
   | "menu"
   | "product"
   | "cart"

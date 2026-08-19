@@ -1,14 +1,9 @@
-import { useRef, useState } from "react"
-import { ImageBackground, KeyboardAvoidingView, Platform, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native"
-import { Image } from "expo-image"
-import { LinearGradient } from "expo-linear-gradient"
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
-import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker"
-import { assets as A } from "../data/assets"
-import { products } from "../data/products"
+import { Pressable, Text, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { Ionicons } from "@expo/vector-icons"
 import { colors as C } from "../theme"
-import { as, cs, hs, ms, ps, rs, s, si, su, xs } from "../theme/screenStyles"
-import type { CartItem, Product, Screen } from "../types"
+import { s } from "../theme/screenStyles"
+import type { Screen } from "../types"
 
 export default function BottomNavigation({
   current,
@@ -27,7 +22,7 @@ export default function BottomNavigation({
     ["account", "Account", "person"],
   ]
   return (
-    <SafeAreaView style={s.nav}>
+    <SafeAreaView edges={["bottom"]} style={s.nav}>
       {tabs.map(([key, label, icon]) => (
         <Pressable key={key} onPress={() => go(key)} style={s.navItem}>
           <View>
