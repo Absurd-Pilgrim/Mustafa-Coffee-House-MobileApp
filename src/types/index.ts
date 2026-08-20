@@ -26,3 +26,14 @@ export type Product = {
 }
 
 export type CartItem = Product & { quantity: number }
+
+export type MenuCategory =
+  | "Featured"
+  | "Hot Coffee"
+  | "Iced Coffee"
+  | "Signature Lattes"
+  | "Authentic Teas"
+  | "Bakery"
+  | "Desserts"
+  | "Gelato"
+  | "Nitro Brew"
