@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
-import { ImageBackground, KeyboardAvoidingView, Platform, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native"
+import { ImageBackground, KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, TextInput, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 import { Image } from "expo-image"
 import { LinearGradient } from "expo-linear-gradient"
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
