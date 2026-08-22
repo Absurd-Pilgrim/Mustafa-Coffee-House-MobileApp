@@ -13,6 +13,21 @@ export type Screen =
   | "checkout"
   | "rewards"
   | "account"
+  | AccountPage
+
+export type AccountPage =
+  | "profile-information"
+  | "payment-methods"
+  | "gift-cards"
+  | "favorite-store"
+  | "dietary-preferences"
+  | "notification-settings"
+  | "order-history"
+  | "app-language"
+  | "help-support"
+  | "accessibility"
+  | "privacy-policy"
+  | "terms-of-service"
 
 export type Product = {
   id: string
