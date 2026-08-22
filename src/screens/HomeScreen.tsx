@@ -10,7 +10,7 @@ import { hs } from "../theme/screenStyles"
 import type { CartItem, MenuCategory, Product, Screen } from "../types"
 
 const specialOffers = [
-  { product: products[0], label: "TODAY ONLY", title: "Pistachio Latte Treat", detail: "A creamy house favorite, made for your evening ritual.", price: "$4.95" },
+  { product: products[0], label: "TODAY ONLY", title: "Pistachio Latte Treat", detail: "A creamy house favorite, made for your special evening.", price: "$4.95" },
   { product: products[3], label: "FRESHLY BAKED", title: "Pistachio Croissant", detail: "Flaky, filled, and finished with a rich pistachio drizzle.", price: "$3.95" },
   { product: products[4], label: "CHEF'S SPECIAL", title: "Chocolate Cake Slice", detail: "Dark chocolate glaze with a velvety cocoa crumb.", price: "$6.95" },
 ]
