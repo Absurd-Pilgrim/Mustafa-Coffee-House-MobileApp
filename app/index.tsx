@@ -35,12 +35,12 @@ const accountPages: AccountPage[] = [
 
 export default function MustafaCoffeeApp() {
  const [dm]=useDMFonts({DMSerifDisplay_400Regular}); const [fira]=useFiraFonts({FiraSans_400Regular,FiraSans_500Medium,FiraSans_600SemiBold,FiraSans_700Bold})
- const [screen,setScreen]=useState<Screen>("splash"); const [menuCategory,setMenuCategory]=useState<MenuCategory>("Featured"); const [cart,setCart]=useState<CartItem[]>([]); const [beans,setBeans]=useState(240); const [userName,setUserName]=useState("User Name"); const [selectedProduct,setSelectedProduct]=useState<Product>(products[0])
+ const [screen,setScreen]=useState<Screen>("splash"); const [menuCategory,setMenuCategory]=useState<MenuCategory>("Featured"); const [cart,setCart]=useState<CartItem[]>([]); const [beans,setBeans]=useState(240); const [userName,setUserName]=useState("User Name"); const [selectedProduct,setSelectedProduct]=useState<Product>(products[0]); const [productReturnScreen,setProductReturnScreen]=useState<"home"|"menu">("menu")
  const go=(next:Screen)=>{if(next==="menu")setMenuCategory("Featured");setScreen(next)}
  const openMenu=(category:MenuCategory)=>{setMenuCategory(category);setScreen("menu")}
  const add=(p:Product)=>setCart(old=>old.some(x=>x.id===p.id)?old.map(x=>x.id===p.id?{...x,quantity:x.quantity+1}:x):[...old,{...p,quantity:1}])
  const change=(id:string,d:number)=>setCart(old=>old.map(x=>x.id===id?{...x,quantity:x.quantity+d}:x).filter(x=>x.quantity>0))
- const openProduct=(p:Product)=>{setSelectedProduct(p);setScreen("product")}
+ const openProduct=(p:Product)=>{setSelectedProduct(p);setProductReturnScreen(screen==="home"?"home":"menu");setScreen("product")}
  const addQuantity=(p:Product,q:number)=>{setCart(old=>old.some(x=>x.id===p.id)?old.map(x=>x.id===p.id?{...x,quantity:x.quantity+q}:x):[...old,{...p,quantity:q}]);setScreen("cart")}
  const count=useMemo(()=>cart.reduce((n,x)=>n+x.quantity,0),[cart])
  useEffect(()=>{
@@ -48,7 +48,7 @@ export default function MustafaCoffeeApp() {
    let previous:Screen|null=null
    if(accountPages.includes(screen as AccountPage))previous="account"
    else if(screen==="locations")previous="home"
-   else if(screen==="product")previous="menu"
+   else if(screen==="product")previous=productReturnScreen
    else if(screen==="checkout")previous="cart"
    else if(screen==="signin"||screen==="signup")previous="onboarding"
    if(!previous)return false
@@ -56,10 +56,10 @@ export default function MustafaCoffeeApp() {
    return true
   })
   return()=>subscription.remove()
- },[screen])
+ },[screen,productReturnScreen])
  if(!dm||!fira)return <SafeAreaView edges={["bottom"]} style={[s.fill,s.loading]}><ActivityIndicator color={C.gold}/></SafeAreaView>
  const accountPage=accountPages.includes(screen as AccountPage)?screen as AccountPage:null
- const content=screen==="splash"?<SplashScreen next={()=>setScreen("onboarding")}/>:screen==="onboarding"?<OnboardingScreen signin={()=>setScreen("signin")} signup={()=>setScreen("signup")}/>:screen==="signin"?<SignInScreen back={()=>setScreen("onboarding")} createAccount={()=>setScreen("signup")} done={()=>setScreen("home")}/>:screen==="signup"?<SignUpScreen back={()=>setScreen("onboarding")} done={name=>{if(name.trim())setUserName(name.trim());setBeans(490);setScreen("home")}}/>:screen==="home"?<HomeScreen go={go} openMenu={openMenu} add={add} change={change} cart={cart} openProduct={openProduct} beans={beans} userName={userName}/>:screen==="locations"?<LocationsScreen back={()=>setScreen("home")}/>:screen==="menu"?<MenuScreen initialCategory={menuCategory} add={add} openProduct={openProduct}/>:screen==="product"?<ProductScreen product={selectedProduct} back={()=>setScreen("menu")} add={addQuantity}/>:screen==="cart"?<CartScreen items={cart} change={change} go={go} beans={beans}/>:screen==="checkout"?<CheckoutScreen items={cart} beans={beans} userName={userName} back={()=>setScreen("cart")}/>:screen==="rewards"?<RewardsScreen beans={beans}/>:screen==="account"?<AccountScreen beans={beans} userName={userName} open={setScreen} signout={()=>setScreen("onboarding")}/>:accountPage?<AccountDetailScreen page={accountPage} userName={userName} back={()=>setScreen("account")} go={go}/>:null
+ const content=screen==="splash"?<SplashScreen next={()=>setScreen("onboarding")}/>:screen==="onboarding"?<OnboardingScreen signin={()=>setScreen("signin")} signup={()=>setScreen("signup")}/>:screen==="signin"?<SignInScreen back={()=>setScreen("onboarding")} createAccount={()=>setScreen("signup")} done={()=>setScreen("home")}/>:screen==="signup"?<SignUpScreen back={()=>setScreen("onboarding")} done={name=>{if(name.trim())setUserName(name.trim());setBeans(490);setScreen("home")}}/>:screen==="home"?<HomeScreen go={go} openMenu={openMenu} add={add} change={change} cart={cart} openProduct={openProduct} beans={beans} userName={userName}/>:screen==="locations"?<LocationsScreen back={()=>setScreen("home")}/>:screen==="menu"?<MenuScreen initialCategory={menuCategory} cart={cart} change={change} openProduct={openProduct}/>:screen==="product"?<ProductScreen product={selectedProduct} back={()=>setScreen(productReturnScreen)} add={addQuantity}/>:screen==="cart"?<CartScreen items={cart} change={change} go={go} beans={beans}/>:screen==="checkout"?<CheckoutScreen items={cart} beans={beans} userName={userName} back={()=>setScreen("cart")}/>:screen==="rewards"?<RewardsScreen beans={beans}/>:screen==="account"?<AccountScreen beans={beans} userName={userName} open={setScreen} signout={()=>setScreen("onboarding")}/>:accountPage?<AccountDetailScreen page={accountPage} userName={userName} back={()=>setScreen("account")} go={go}/>:null
  const showBottomNavigation=(["home","menu","cart","rewards","account"] as Screen[]).includes(screen)
  return <SafeAreaView edges={showBottomNavigation?[]:["bottom"]} style={s.shell}>{content}{showBottomNavigation&&<BottomNavigation current={screen} go={go} count={count}/>}</SafeAreaView>
 }

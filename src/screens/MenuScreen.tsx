@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons"
 import { products } from "../data/products"
 import { colors as C } from "../theme"
 import { ms } from "../theme/screenStyles"
-import type { MenuCategory, Product } from "../types"
+import type { CartItem, MenuCategory, Product } from "../types"
 
 const tabs: MenuCategory[] = [
   "Featured",
@@ -25,11 +25,13 @@ const seasonalProduct =
   products.find((product) => product.id === "saffron-rose-latte") ?? products[0]
 
 export default function MenuScreen({
-  add,
+  cart,
+  change,
   openProduct,
   initialCategory,
 }: {
-  add: (product: Product) => void
+  cart: CartItem[]
+  change: (id: string, delta: number) => void
   openProduct: (product: Product) => void
   initialCategory: MenuCategory
 }) {
@@ -119,7 +121,9 @@ export default function MenuScreen({
 
           {visible.length ? (
             <View style={ms.grid}>
-              {visible.map((product) => (
+              {visible.map((product) => {
+                const quantity = cart.find((item) => item.id === product.id)?.quantity ?? 0
+                return (
                 <Pressable
                   onPress={() => openProduct(product)}
                   key={product.id}
@@ -140,21 +144,26 @@ export default function MenuScreen({
                         <Text style={ms.price}>${product.price.toFixed(2)}</Text>
                         <Text style={ms.beans}> +{product.beans}B</Text>
                       </View>
-                      <Pressable
-                        onPress={(event) => {
-                          event.stopPropagation()
-                          add(product)
-                        }}
-                        accessibilityRole="button"
-                        accessibilityLabel={`Add ${product.name} to order`}
-                        style={ms.add}
-                      >
-                        <Text style={ms.addText}>+</Text>
-                      </Pressable>
+                      {quantity === 0 ? (
+                        <Pressable onPress={(event) => { event.stopPropagation(); openProduct(product) }} accessibilityRole="button" accessibilityLabel={`Customize ${product.name}`} style={ms.add}>
+                          <Text style={ms.addText}>+</Text>
+                        </Pressable>
+                      ) : (
+                        <View style={ms.stepper}>
+                          <Pressable hitSlop={8} onPress={(event) => { event.stopPropagation(); change(product.id, -1) }} accessibilityRole="button" accessibilityLabel={`Remove one ${product.name}`} style={ms.stepButton}>
+                            <Text style={ms.stepText}>−</Text>
+                          </Pressable>
+                          <Text style={ms.quantity}>{quantity}</Text>
+                          <Pressable hitSlop={8} onPress={(event) => { event.stopPropagation(); openProduct(product) }} accessibilityRole="button" accessibilityLabel={`Customize another ${product.name}`} style={ms.stepButton}>
+                            <Text style={ms.stepText}>+</Text>
+                          </Pressable>
+                        </View>
+                      )}
                     </View>
                   </View>
                 </Pressable>
-              ))}
+                )
+              })}
             </View>
           ) : (
             <View style={ms.empty}>
