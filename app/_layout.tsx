@@ -10,12 +10,11 @@ export default function RootLayout() {
     if (Platform.OS !== 'android') return;
 
     NavigationBar.setStyle('dark');
-    NavigationBar.setButtonStyleAsync('light').catch(() => undefined);
   }, []);
 
   return (
     <SafeAreaProvider>
-      <StatusBar style="light" translucent backgroundColor="transparent" />
+      <StatusBar style="light" />
       <Stack screenOptions={{ headerShown: false, animation: 'fade' }} />
     </SafeAreaProvider>
   );

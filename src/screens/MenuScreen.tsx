@@ -16,9 +16,12 @@ export default function MenuScreen({add,openProduct,initialCategory}:{add:(p:Pro
   const [query,setQuery]=useState('')
   const tabsRef=useRef<ScrollView>(null)
   useEffect(()=>{
-    setCategory(initialCategory)
     const index=tabs.indexOf(initialCategory)
-    requestAnimationFrame(()=>tabsRef.current?.scrollTo({x:Math.max(0,index*108-18),animated:false}))
+    const frame=requestAnimationFrame(()=>{
+      setCategory(initialCategory)
+      tabsRef.current?.scrollTo({x:Math.max(0,index*108-18),animated:false})
+    })
+    return ()=>cancelAnimationFrame(frame)
   },[initialCategory])
   const saffron:Product={id:'saffron',name:'Saffron Rose Latte',description:'Golden saffron and delicate rose water meet velvety espresso.',price:6.75,beans:68,image:A.latte,category:'Signature Lattes',badge:'Seasonal'}
   const all=[products[0],saffron,products[1],products[2],products[3],products[4]]
